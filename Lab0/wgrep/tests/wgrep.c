@@ -7,8 +7,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-void searchForTerm(int argNum, char *fileName, char term[]);
-
 int main(int argc, const char * argv[]) {
     //Get the search term from command line argument and store in term
     char term[100];
