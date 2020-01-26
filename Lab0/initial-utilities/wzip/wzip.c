@@ -15,8 +15,8 @@ int main(int argc, const char * argv[]) {
     }
     
     if(argc >= 2) {
-        while(argc > 1) {
-            const char *fileName = argv[argc - 1];
+        for(int i = 1; i < argc; i++) {
+            const char *fileName = argv[i];
 
             FILE *fp1 = fopen(fileName, "r");
 
@@ -53,8 +53,6 @@ int main(int argc, const char * argv[]) {
             }
 
             fclose(fp1);
-
-            argc--;
         }
         
         exit(0);
