@@ -24,36 +24,11 @@ int main(int argc, const char * argv[]) {
         exit(1);
     } else if (argc == 2) {
         size_t nameMaxSize = 100;
-        char *fileName = malloc(nameMaxSize * sizeof(char));
-        char *ptr = NULL;
-        
-        //Get the file name from stdin
-        fgets(fileName, nameMaxSize, stdin);
-        
-        //Check for newline and remove it
-        if ((ptr = strchr(fileName, '\n')) != NULL) {
-            *ptr = '\0';
-        }
-        
-        //Open file to read
-        FILE *fp = fopen(fileName, "r");
-        
-        //If file can't be opened, print error message
-        if(fp == NULL) {
-            printf("wgrep: cannot open file\n");
-            exit(1);
-        }
         
         char *buffer = (char *) malloc(nameMaxSize * sizeof(char));
-        
-        //Print error message if unable to allocate memory for buffer
-        if(buffer == NULL) {
-            printf("Unable to allocate memory for buffer.");
-            exit(1);
-        }
 
         //Get each line in file, compare it to term, and print buffer if there is a match
-        while(getline(&buffer, &nameMaxSize, fp) != EOF) {
+        while(getline(&buffer, &nameMaxSize, stdin) != EOF) {
             if(strstr(buffer, term) != NULL) {
                 printf("%s", buffer);
             }
@@ -61,7 +36,7 @@ int main(int argc, const char * argv[]) {
 
         //Free buffer memory and close file
         free(buffer);
-        fclose(fp);
+        fclose(stdin);
     
     } else if (argc > 2) {
         //For each file passed to wgrep
